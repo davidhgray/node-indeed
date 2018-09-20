@@ -23,7 +23,7 @@ async function writeToDb(jobtitle, company, city, state, formatted_location, sou
 
 async function getJobKey() {
 
-    const indeed = await fetch('http://api.indeed.com/ads/apisearch?publisher=' + process.env.INDEED_PUBLISHER_KEY + '&q=javascript&l=chicago&sort=&radius=&st=&jt=&start=859&limit=10&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2&format=json')
+    const indeed = await fetch('http://api.indeed.com/ads/apisearch?publisher=' + process.env.INDEED_PUBLISHER_KEY + '&q=javascript&l=seattle&sort=&radius=&st=&jt=&start=859&limit=10&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2&format=json')
     const json = await indeed.json();
     const count = await json.results.length;
     console.log(count);
