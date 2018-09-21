@@ -4,8 +4,14 @@ var Client = require('node-rest-client').Client;
 var fetch = require("node-fetch");
 
 var restClient = new Client();
-var conString = process.env.CONNECTION_STRING;
-var client = new pg.Client(conString);
+var conString = process.env.RDS_CONNECTION_STRING;
+var client = new pg.Client({
+    user: process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT
+});
 client.connect();
 console.log(process.env.INDEED_PUBLISHER_KEY);
 
@@ -30,6 +36,7 @@ async function getJobKey() {
 
     try {
         for (i = 0; i < count; i++) {
+            // are all these awaits necessary?  can they be removed? except for when writeToDB is called?
             var jobtitle = await json.results[i].jobtitle;
             var company = await json.results[i].company;
             var city = await json.results[i].city;
